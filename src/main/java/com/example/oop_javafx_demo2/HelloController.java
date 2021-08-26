@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 
 public class HelloController {
+    private static final int DIST = 5;
     @FXML
-    private Pane myPane;
+    private StackPane myPane;
 
     @FXML
     private Circle myCircle;
@@ -21,16 +23,13 @@ public class HelloController {
 
     @FXML
     protected void onEnlargeClicked() {
-        if (myCircle.getCenterX() - myCircle.getRadius() - 5 > 0 &&
-                myCircle.getCenterX() + myCircle.getRadius() + 5 < myPane.getWidth() &&
-                myCircle.getCenterY() - myCircle.getRadius() - 5 > 0 &&
-                myCircle.getCenterX() + myCircle.getRadius() + 5 < myPane.getHeight() ) {
-            myCircle.setRadius(myCircle.getRadius() + 5);
+        if ((myCircle.getRadius() + DIST) * 2 < myPane.getHeight() && ((myCircle.getRadius() + DIST) * 2) < myPane.getWidth()) {
+            myCircle.setRadius(myCircle.getRadius() + DIST);
         }
     }
 
     @FXML
     protected void onShrinkClicked() {
-        myCircle.setRadius(myCircle.getRadius() - 5 > 2 ? myCircle.getRadius() - 5 : myCircle.getRadius());
+        myCircle.setRadius(myCircle.getRadius() - DIST > 0 ? myCircle.getRadius() - DIST : myCircle.getRadius());
     }
 }
